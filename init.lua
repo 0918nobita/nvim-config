@@ -1,3 +1,5 @@
+local lsp = require('lsp')
+
 -- 改行を可視化する
 vim.opt.list = true
 vim.opt.listchars = {
@@ -55,12 +57,7 @@ require 'packer'.startup(function(use)
   -- opt = true で遅延読み込みさせている
   use { 'wbthomason/packer.nvim', opt = true }
 
-  -- LSP 設定集
-  use 'neovim/nvim-lspconfig'
-
-  -- 自動補完
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/nvim-cmp'
+  lsp.usePlugins(use)
 
   -- カラースキーム
   -- vim.opt.colorscheme は start, opt の両方で検索するので、opt = true でよい
@@ -80,47 +77,9 @@ vim.cmd.colorscheme 'iceberg'
 
 require 'lualine'.setup {}
 
-local lspconfig = require 'lspconfig'
+lsp.setupServers()
 
--- Lua の言語サーバの設定
-lspconfig.lua_ls.setup {
-  settings = {
-    Lua = {
-      -- 使用するランタイムのバージョンは LuaJIT
-      runtime = { version = "LuaJIT" },
-
-      diagnostics = {
-        -- vim をグローバル変数として認識させる
-        globals = { 'vim' },
-      },
-
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-        checkThirdParty = false,
-      },
-
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
-
-lspconfig.tsserver.setup {}
-
-local cmp = require 'cmp'
-
-cmp.setup {
-  mapping = cmp.mapping.preset.insert {
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<C-e>'] = cmp.mapping.abort(),
-  },
-
-  sources = cmp.config.sources {
-    { name = 'nvim_lsp' },
-  },
-}
+lsp.setupCompletion()
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
