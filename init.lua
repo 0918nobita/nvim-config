@@ -1,4 +1,6 @@
 local lualine = require('lualine')
+local tree = require('nvim-tree')
+local treeApi = require('nvim-tree.api')
 
 require('basic')
 local lsp = require('lsp')
@@ -25,6 +27,9 @@ require 'packer'.startup(function(use)
 
   -- .editorconfig を検出してエディタ設定に反映する
   use 'editorconfig/editorconfig-vim'
+
+  -- ファイルエクスプローラー
+  use 'nvim-tree/nvim-tree.lua'
 end)
 
 vim.cmd.colorscheme 'iceberg'
@@ -40,3 +45,30 @@ lsp.setupCompletion {
 }
 
 lsp.registerHoverAction 'K'
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+tree.setup {
+  filters = { custom = { '^.git$' } }
+}
+
+vim.api.nvim_set_keymap(
+  'n', '<C-h>', ':NvimTreeToggle<CR>',
+  { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  'n', 'ge', ':lua vim.diagnostic.open_float { border = \'single\' }<CR>',
+  { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  'n', 'g]', ':lua vim.diagnostic.goto_next()<CR>',
+  { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  'n', 'g[', ':lua vim.diagnostic.goto_prev()<CR>',
+  { noremap = true, silent = true }
+)
