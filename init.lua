@@ -32,13 +32,11 @@ vim.cmd.colorscheme 'iceberg'
 lualine.setup {}
 
 lsp.setupServers()
-lsp.setupCompletion()
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.hoverProvider then
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-    end
-  end,
-})
+lsp.setupCompletion {
+  nextItem = '<Tab>',
+  prevItem = '<S-Tab>',
+  abort = '<C-e>',
+}
+
+lsp.registerHoverAction 'K'

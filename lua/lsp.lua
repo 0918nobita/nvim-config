@@ -38,14 +38,14 @@ local setupServers = function()
   lspconfig.tsserver.setup {}
 end
 
-local setupCompletion = function()
+local setupCompletion = function(keys)
   local cmp = require 'cmp'
 
   cmp.setup {
     mapping = cmp.mapping.preset.insert {
-      ['<Tab>'] = cmp.mapping.select_next_item(),
-      ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-      ['<C-e>'] = cmp.mapping.abort(),
+      [keys.nextItem] = cmp.mapping.select_next_item(),
+      [keys.prevItem] = cmp.mapping.select_prev_item(),
+      [keys.abort] = cmp.mapping.abort(),
     },
 
     sources = cmp.config.sources {
@@ -54,8 +54,20 @@ local setupCompletion = function()
   }
 end
 
+local registerHoverAction = function(key)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client.server_capabilities.hoverProvider then
+        vim.keymap.set('n', key, vim.lsp.buf.hover, { buffer = args.buf })
+      end
+    end,
+  })
+end
+
 return {
   usePlugins = usePlugins,
   setupServers = setupServers,
   setupCompletion = setupCompletion,
+  registerHoverAction = registerHoverAction,
 }
