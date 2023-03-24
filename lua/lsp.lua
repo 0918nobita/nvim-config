@@ -7,7 +7,7 @@ local usePlugins = function(use)
   use 'hrsh7th/nvim-cmp'
 end
 
-local setupServers = function()
+local function setupServers()
   local lspconfig = require 'lspconfig'
 
   -- Lua の言語サーバの設定
@@ -38,7 +38,7 @@ local setupServers = function()
   lspconfig.tsserver.setup {}
 end
 
-local setupCompletion = function(keys)
+local function setupCompletion(keys)
   local cmp = require 'cmp'
 
   cmp.setup {
@@ -54,7 +54,7 @@ local setupCompletion = function(keys)
   }
 end
 
-local registerHoverAction = function(key)
+local function registerHoverAction(key)
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
