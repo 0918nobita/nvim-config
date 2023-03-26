@@ -1,40 +1,28 @@
-local lualine = require('lualine')
-local tree = require('nvim-tree')
-local treeApi = require('nvim-tree.api')
+require 'my_nvim/basic'
+require 'my_nvim/init_lazy_nvim'
 
-require('basic')
-local lsp = require('lsp')
+local filer = require 'my_nvim/filer'
+local lsp = require 'my_nvim/lsp'
+local statusline = require 'my_nvim/statusline'
 
-vim.cmd.packadd 'packer.nvim'
-
-require 'packer'.startup(function(use)
-  -- プラグインマネージャ
-  -- :PackerSync, :PackerStatus 等のコマンドを使用するときだけ読み込んでほしいので
-  -- opt = true で遅延読み込みさせている
-  use { 'wbthomason/packer.nvim', opt = true }
-
-  lsp.usePlugins(use)
+require 'lazy'.setup {
+  filer.plugins,
+  lsp.plugins,
+  statusline.plugins,
 
   -- カラースキーム
-  -- vim.opt.colorscheme は start, opt の両方で検索するので、opt = true でよい
-  use { 'cocopon/iceberg.vim', opt = true }
-
-  -- statusline をカスタマイズするためのプラグイン
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
+  { 'cocopon/iceberg.vim', lazy = false },
 
   -- .editorconfig を検出してエディタ設定に反映する
-  use 'editorconfig/editorconfig-vim'
-
-  -- ファイルエクスプローラー
-  use 'nvim-tree/nvim-tree.lua'
-end)
+  { 'editorconfig/editorconfig-vim', lazy = false },
+}
 
 vim.cmd.colorscheme 'iceberg'
 
-lualine.setup {}
+filer.setup()
+statusline.setup()
+
+filer.registerToggleAction '<C-h>'
 
 lsp.setupServers()
 
@@ -45,18 +33,6 @@ lsp.setupCompletion {
 }
 
 lsp.registerHoverAction 'K'
-
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-tree.setup {
-  filters = { custom = { '^.git$' } }
-}
-
-vim.api.nvim_set_keymap(
-  'n', '<C-h>', ':NvimTreeToggle<CR>',
-  { noremap = true, silent = true }
-)
 
 vim.api.nvim_set_keymap(
   'n', 'ge', ':lua vim.diagnostic.open_float { border = \'single\' }<CR>',

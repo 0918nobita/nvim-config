@@ -1,11 +1,16 @@
-local usePlugins = function(use)
+local plugins = {
   -- LSP 設定集
-  use 'neovim/nvim-lspconfig'
+  'neovim/nvim-lspconfig',
 
   -- 補完
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/nvim-cmp'
-end
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+    },
+  },
+}
 
 local function setupServers()
   local lspconfig = require 'lspconfig'
@@ -66,7 +71,7 @@ local function registerHoverAction(key)
 end
 
 return {
-  usePlugins = usePlugins,
+  plugins = plugins,
   setupServers = setupServers,
   setupCompletion = setupCompletion,
   registerHoverAction = registerHoverAction,
