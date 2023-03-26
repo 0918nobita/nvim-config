@@ -1,0 +1,13 @@
+name: CI
+
+on: push
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: asdf-vm/actions/setup@v2
+      - run: asdf plugin add stylua
+      - run: asdf install
+      - run: stylua --check lua/ init.lua
