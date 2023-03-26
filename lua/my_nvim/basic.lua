@@ -36,13 +36,10 @@ for _, keyName in ipairs(arrowKeys) do
 end
 
 -- jj で挿入モードから通常モードに戻る
-vim.api.nvim_set_keymap(
-  'i', 'jj', '<ESC>',
-  {
-    noremap = true, -- 素の Vim が持っている機能に割り当てる
-    silent = true -- 実行するコマンドをコマンドラインに表示しない
-  }
-)
+vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {
+  noremap = true, -- 素の Vim が持っている機能に割り当てる
+  silent = true, -- 実行するコマンドをコマンドラインに表示しない
+})
 
 -- ヤンクした内容を自動でクリップボードにコピーする
 vim.opt.clipboard = 'unnamed'

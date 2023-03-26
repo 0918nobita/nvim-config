@@ -20,7 +20,7 @@ local function setupServers()
     settings = {
       Lua = {
         -- 使用するランタイムのバージョンは LuaJIT
-        runtime = { version = "LuaJIT" },
+        runtime = { version = 'LuaJIT' },
 
         diagnostics = {
           -- vim をグローバル変数として認識させる
