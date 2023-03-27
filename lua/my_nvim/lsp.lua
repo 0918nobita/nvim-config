@@ -43,6 +43,12 @@ local function setupServers()
   lspconfig.tsserver.setup {}
 end
 
+---@class LspCompletionKeymaps
+---@field nextItem string
+---@field prevItem string
+---@field abort string
+
+--- @param keys LspCompletionKeymaps
 local function setupCompletion(keys)
   local cmp = require 'cmp'
 
@@ -59,12 +65,22 @@ local function setupCompletion(keys)
   }
 end
 
-local function registerHoverAction(key)
+---@class LspActionKeymaps
+---@field definition string
+---@field hover string
+
+---@param keys LspActionKeymaps
+local function setKeymaps(keys)
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
+
       if client.server_capabilities.hoverProvider then
-        vim.keymap.set('n', key, vim.lsp.buf.hover, { buffer = args.buf })
+        vim.keymap.set('n', keys.hover, vim.lsp.buf.hover, { buffer = args.buf })
+      end
+
+      if client.server_capabilities.definitionProvider then
+        vim.keymap.set('n', keys.definition, vim.lsp.buf.definition, { buffer = args.buf })
       end
     end,
   })
@@ -74,5 +90,5 @@ return {
   plugins = plugins,
   setupServers = setupServers,
   setupCompletion = setupCompletion,
-  registerHoverAction = registerHoverAction,
+  setKeymaps = setKeymaps,
 }

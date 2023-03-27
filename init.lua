@@ -29,7 +29,10 @@ lsp.setupCompletion {
   abort = '<C-e>',
 }
 
-lsp.registerHoverAction 'K'
+lsp.setKeymaps {
+  definition = 'gd',
+  hover = 'K',
+}
 
 vim.api.nvim_set_keymap(
   'n',

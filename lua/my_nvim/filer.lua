@@ -57,6 +57,7 @@ local function setup()
   })
 end
 
+---@param key string
 local function registerToggleAction(key)
   vim.api.nvim_set_keymap('n', key, ':Fern . -drawer -toggle -width=40<CR>', { noremap = true, silent = true })
 end
