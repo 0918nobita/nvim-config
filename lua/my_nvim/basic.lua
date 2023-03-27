@@ -45,3 +45,6 @@ vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {
 
 -- ヤンクした内容を自動でクリップボードにコピーする
 vim.opt.clipboard = 'unnamed'
+
+-- バッファ切り替え時に編集中のファイルを保存しなくてもいいようにする
+vim.opt.hidden = true

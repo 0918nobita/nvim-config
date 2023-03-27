@@ -29,17 +29,14 @@ local function setupServers()
       Lua = {
         -- 使用するランタイムのバージョンは LuaJIT
         runtime = { version = 'LuaJIT' },
-
         diagnostics = {
           -- vim をグローバル変数として認識させる
           globals = { 'vim' },
         },
-
         workspace = {
           library = vim.api.nvim_get_runtime_file('', true),
           checkThirdParty = false,
         },
-
         telemetry = {
           enable = false,
         },
@@ -87,6 +84,7 @@ end
 
 ---@class LspActionKeymaps
 ---@field definition string
+---@field format string
 ---@field hover string
 ---@field references string
 
@@ -107,6 +105,10 @@ local function setKeymaps(keys)
       if client.server_capabilities.referencesProvider then
         vim.keymap.set('n', keys.references, vim.lsp.buf.references, { buffer = args.buf })
       end
+
+      vim.keymap.set('n', keys.format, function()
+        vim.lsp.buf.format { async = true }
+      end, { buffer = args.buf })
     end,
   })
 end

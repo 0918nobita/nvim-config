@@ -12,6 +12,13 @@ require('lazy').setup {
 
   -- カラースキーム
   { 'cocopon/iceberg.vim', lazy = false },
+
+  {
+    'akinsho/bufferline.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
 }
 
 vim.cmd.colorscheme 'iceberg'
@@ -19,7 +26,7 @@ vim.cmd.colorscheme 'iceberg'
 filer.setup()
 statusline.setup()
 
-filer.registerToggleAction '<C-h>'
+filer.registerToggleAction '<C-w>'
 
 lsp.setupServers()
 
@@ -31,6 +38,7 @@ lsp.setupCompletion {
 
 lsp.setKeymaps {
   definition = 'gd',
+  format = 'gf',
   hover = 'K',
   references = 'gr',
 }
@@ -45,3 +53,5 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('n', 'g]', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'g[', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+
+require('bufferline').setup {}
