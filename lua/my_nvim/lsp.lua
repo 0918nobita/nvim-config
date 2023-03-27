@@ -17,6 +17,8 @@ local plugins = {
       'nvim-lua/plenary.nvim',
     },
   },
+
+  { 'hrsh7th/vim-vsnip', lazy = false },
 }
 
 local function setupServers()
@@ -71,11 +73,17 @@ local function setupCompletion(keys)
   local cmp = require 'cmp'
 
   cmp.setup {
+    snippet = {
+      expand = function(args)
+        vim.fn['vsnip#anonymous'](args.body)
+      end,
+    },
+
     mapping = cmp.mapping.preset.insert {
       [keys.nextItem] = cmp.mapping.select_next_item(),
       [keys.prevItem] = cmp.mapping.select_prev_item(),
       [keys.abort] = cmp.mapping.abort(),
-      [keys.confirm] = cmp.mapping.confirm(),
+      [keys.confirm] = cmp.mapping.confirm { select = true },
     },
 
     sources = cmp.config.sources {
