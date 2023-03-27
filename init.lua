@@ -26,7 +26,7 @@ vim.cmd.colorscheme 'iceberg'
 filer.setup()
 statusline.setup()
 
-filer.registerToggleAction '<C-w>'
+filer.registerToggleAction '<C-k>'
 
 lsp.setupServers()
 
