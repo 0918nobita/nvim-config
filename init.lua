@@ -1,27 +1,29 @@
 require 'my_nvim/basic'
 require 'my_nvim/init_lazy_nvim'
 
+local buffer = require 'my_nvim/buffer'
 local filer = require 'my_nvim/filer'
 local lsp = require 'my_nvim/lsp'
 local statusline = require 'my_nvim/statusline'
 
 require('lazy').setup {
+  buffer.plugins,
   filer.plugins,
   lsp.plugins,
   statusline.plugins,
 
   -- カラースキーム
   { 'cocopon/iceberg.vim', lazy = false },
-
-  {
-    'akinsho/bufferline.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-  },
 }
 
 vim.cmd.colorscheme 'iceberg'
+
+buffer.setup()
+
+buffer.setKeymaps {
+  prev = '<C-h>',
+  next = '<C-l>',
+}
 
 filer.setup()
 statusline.setup()
@@ -54,5 +56,3 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('n', 'g]', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'g[', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
-
-require('bufferline').setup {}
