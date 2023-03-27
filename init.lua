@@ -32,6 +32,7 @@ lsp.setupCompletion {
 lsp.setKeymaps {
   definition = 'gd',
   hover = 'K',
+  references = 'gr',
 }
 
 vim.api.nvim_set_keymap(

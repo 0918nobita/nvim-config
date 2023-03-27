@@ -68,6 +68,7 @@ end
 ---@class LspActionKeymaps
 ---@field definition string
 ---@field hover string
+---@field references string
 
 ---@param keys LspActionKeymaps
 local function setKeymaps(keys)
@@ -81,6 +82,10 @@ local function setKeymaps(keys)
 
       if client.server_capabilities.definitionProvider then
         vim.keymap.set('n', keys.definition, vim.lsp.buf.definition, { buffer = args.buf })
+      end
+
+      if client.server_capabilities.referencesProvider then
+        vim.keymap.set('n', keys.references, vim.lsp.buf.references, { buffer = args.buf })
       end
     end,
   })
