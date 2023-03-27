@@ -1,3 +1,5 @@
+vim.opt.title = true
+
 -- 改行を可視化する
 vim.opt.list = true
 vim.opt.listchars = {
