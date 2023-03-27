@@ -12,9 +12,6 @@ require('lazy').setup {
 
   -- カラースキーム
   { 'cocopon/iceberg.vim', lazy = false },
-
-  -- .editorconfig を検出してエディタ設定に反映する
-  { 'editorconfig/editorconfig-vim', lazy = false },
 }
 
 vim.cmd.colorscheme 'iceberg'
