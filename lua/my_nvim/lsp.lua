@@ -10,13 +10,21 @@ local plugins = {
       'hrsh7th/cmp-nvim-lsp',
     },
   },
+
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+  },
 }
 
 local function setupServers()
-  local lspconfig = require 'lspconfig'
+  local lspConfig = require 'lspconfig'
+  local nullLs = require 'null-ls'
 
   -- Lua の言語サーバの設定
-  lspconfig.lua_ls.setup {
+  lspConfig.lua_ls.setup {
     settings = {
       Lua = {
         -- 使用するランタイムのバージョンは LuaJIT
@@ -40,7 +48,19 @@ local function setupServers()
   }
 
   -- TypeScript の言語サーバの設定
-  lspconfig.tsserver.setup {}
+  lspConfig.tsserver.setup {}
+
+  nullLs.setup {
+    sources = {
+      nullLs.builtins.formatting.stylua,
+
+      nullLs.builtins.formatting.prettier,
+
+      nullLs.builtins.diagnostics.eslint.with {
+        prefer_local = 'node_modules/.bin',
+      },
+    },
+  }
 end
 
 ---@class LspCompletionKeymaps
