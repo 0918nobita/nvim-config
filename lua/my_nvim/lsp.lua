@@ -51,13 +51,11 @@ local function setupServers()
 
   nullLs.setup {
     sources = {
+      nullLs.builtins.diagnostics.eslint,
+
       nullLs.builtins.formatting.stylua,
-
+      nullLs.builtins.formatting.eslint,
       nullLs.builtins.formatting.prettier,
-
-      nullLs.builtins.diagnostics.eslint.with {
-        prefer_local = 'node_modules/.bin',
-      },
     },
   }
 end
