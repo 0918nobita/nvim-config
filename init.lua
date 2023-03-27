@@ -34,6 +34,7 @@ lsp.setupCompletion {
   nextItem = '<Tab>',
   prevItem = '<S-Tab>',
   abort = '<C-e>',
+  confirm = '<CR>',
 }
 
 lsp.setKeymaps {

@@ -64,6 +64,7 @@ end
 ---@field nextItem string
 ---@field prevItem string
 ---@field abort string
+---@field confirm string
 
 --- @param keys LspCompletionKeymaps
 local function setupCompletion(keys)
@@ -74,6 +75,7 @@ local function setupCompletion(keys)
       [keys.nextItem] = cmp.mapping.select_next_item(),
       [keys.prevItem] = cmp.mapping.select_prev_item(),
       [keys.abort] = cmp.mapping.abort(),
+      [keys.confirm] = cmp.mapping.confirm(),
     },
 
     sources = cmp.config.sources {
