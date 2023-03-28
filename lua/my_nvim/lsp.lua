@@ -49,6 +49,12 @@ local function setupServers()
   -- TypeScript の言語サーバの設定
   lspConfig.tsserver.setup {}
 
+  -- C/C++ の言語サーバの設定
+  lspConfig.clangd.setup {}
+
+  -- シェルスクリプトの言語サーバの設定
+  lspConfig.bashls.setup {}
+
   nullLs.setup {
     sources = {
       nullLs.builtins.diagnostics.eslint,
