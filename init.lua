@@ -6,6 +6,8 @@ local filer = require 'my_nvim/filer'
 local lsp = require 'my_nvim/lsp'
 local statusline = require 'my_nvim/statusline'
 
+vim.g.copilot_no_tab_map = true
+
 require('lazy').setup {
   buffer.plugins,
   filer.plugins,
@@ -14,6 +16,8 @@ require('lazy').setup {
 
   -- カラースキーム
   { 'cocopon/iceberg.vim', lazy = false },
+
+  { 'github/copilot.vim', lazy = false },
 }
 
 vim.cmd.colorscheme 'iceberg'
@@ -56,3 +60,5 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('n', 'g]', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'g[', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { expr = true, noremap = false, silent = true })

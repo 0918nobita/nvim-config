@@ -59,7 +59,10 @@ end
 
 ---@param key string
 local function registerToggleAction(key)
-  vim.api.nvim_set_keymap('n', key, ':Fern . -drawer -toggle -width=40<CR>', { noremap = true, silent = true })
+  vim.keymap.set('n', key, function()
+    local parent_dir = vim.fn.expand '%:h'
+    vim.cmd(':Fern ' .. parent_dir .. ' -drawer -toggle -width=40<CR>')
+  end)
 end
 
 return {

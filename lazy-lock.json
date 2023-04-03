@@ -1,6 +1,7 @@
 {
   "bufferline.nvim": { "branch": "main", "commit": "3677aceb9a72630b0613e56516c8f7151b86f95c" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "0e6b2ed705ddcff9738ec4ea838141654f12eeef" },
+  "copilot.vim": { "branch": "release", "commit": "b6e5624351ba735e25eb8864d7d22819aad00606" },
   "fern-git-status.vim": { "branch": "master", "commit": "151336335d3b6975153dad77e60049ca7111da8e" },
   "fern-hijack.vim": { "branch": "master", "commit": "5989a1ac6ddffd0fe49631826b6743b129992b32" },
   "fern-preview.vim": { "branch": "main", "commit": "74f2c1c45eb48fe9b7e4aa87032f053808944e17" },
