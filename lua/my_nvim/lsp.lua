@@ -55,6 +55,9 @@ local function setupServers()
   -- シェルスクリプトの言語サーバの設定
   lspConfig.bashls.setup {}
 
+  -- OCaml の言語サーバの設定
+  lspConfig.ocamllsp.setup {}
+
   nullLs.setup {
     sources = {
       nullLs.builtins.diagnostics.eslint,
