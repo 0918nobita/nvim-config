@@ -8,6 +8,7 @@ local fuzzy_finder = require 'my_nvim/fuzzy_finder'
 local github_copilot = require 'my_nvim/github_copilot'
 local lsp = require 'my_nvim/lsp'
 local statusline = require 'my_nvim/statusline'
+local sticky_scroll = require 'my_nvim/sticky_scroll'
 
 require('lazy').setup {
   buffer {
@@ -47,6 +48,8 @@ require('lazy').setup {
 
   statusline,
   colorscheme,
+
+  sticky_scroll,
 
   { 'f-person/git-blame.nvim', lazy = false },
 
