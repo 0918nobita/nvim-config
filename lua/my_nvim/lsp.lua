@@ -5,8 +5,9 @@ local plugins = {
   -- 補完
   {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
+      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-nvim-lsp',
     },
   },
@@ -97,6 +98,13 @@ local function setupCompletion(keys)
       { name = 'nvim_lsp' },
     },
   }
+
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources {
+      { name = 'cmdline' },
+    },
+  })
 end
 
 ---@class LspActionKeymaps
