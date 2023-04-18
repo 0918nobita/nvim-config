@@ -17,6 +17,8 @@ require('lazy').setup {
   -- カラースキーム
   { 'cocopon/iceberg.vim', lazy = false },
 
+  { 'f-person/git-blame.nvim', lazy = false },
+
   { 'github/copilot.vim', lazy = false },
 }
 
