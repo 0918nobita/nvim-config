@@ -17,6 +17,15 @@ require('lazy').setup {
   -- カラースキーム
   { 'cocopon/iceberg.vim', lazy = false },
 
+  -- fuzzy finder
+  {
+    'nvim-telescope/telescope.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+  },
+
   { 'f-person/git-blame.nvim', lazy = false },
 
   { 'github/copilot.vim', lazy = false },
@@ -64,3 +73,22 @@ vim.api.nvim_set_keymap('n', 'g]', ':lua vim.diagnostic.goto_next()<CR>', { nore
 vim.api.nvim_set_keymap('n', 'g[', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { expr = true, noremap = false, silent = true })
+
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      n = {
+        ['<ESC>'] = require('telescope.actions').close,
+      },
+      i = {
+        ['<ESC>'] = require('telescope.actions').close,
+      },
+    },
+  },
+}
+
+local telescope_builtin = require 'telescope.builtin'
+
+vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<C-g>', telescope_builtin.live_grep, { noremap = true, silent = true })
