@@ -2,6 +2,7 @@ require 'my_nvim/basic'
 require 'my_nvim/init_lazy_nvim'
 
 local buffer = require 'my_nvim/buffer'
+local cmdline = require 'my_nvim/cmdline'
 local colorscheme = require 'my_nvim/colorscheme'
 local filer = require 'my_nvim/filer'
 local fuzzy_finder = require 'my_nvim/fuzzy_finder'
@@ -47,6 +48,7 @@ require('lazy').setup {
     },
   },
 
+  cmdline,
   statusline,
   colorscheme,
   notification,

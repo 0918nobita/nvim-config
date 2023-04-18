@@ -2,11 +2,19 @@
 
 ## 手動で導入する必要があるもの
 
-### lua-langauge-server
+### [tree-sitter](https://github.com/tree-sitter/tree-sitter)
 
-https://github.com/LuaLS/lua-language-server
+```bash
+brew install tree-sitter
+```
 
-macOS の場合：
+### [ripgrep](https://github.com/BurntSushi/ripgrep)
+
+```bash
+brew install ripgrep
+```
+
+### [lua-langauge-server](https://github.com/LuaLS/lua-language-server)
 
 ```bash
 brew install lua-language-server
