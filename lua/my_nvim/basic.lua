@@ -32,9 +32,9 @@ vim.opt.whichwrap = 'h,l'
 vim.opt.backspace = 'indent,eol,start'
 
 -- 通常モードでの方向キーの使用を禁止する
-local arrowKeys = { '<up>', '<left>', '<right>', '<down>' }
-for _, keyName in ipairs(arrowKeys) do
-  vim.api.nvim_set_keymap('n', keyName, '<nop>', { silent = true })
+local arrow_keys = { '<up>', '<left>', '<right>', '<down>' }
+for _, key_name in ipairs(arrow_keys) do
+  vim.api.nvim_set_keymap('n', key_name, '<nop>', { silent = true })
 end
 
 -- jj で挿入モードから通常モードに戻る

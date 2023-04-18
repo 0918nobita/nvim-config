@@ -1,72 +1,73 @@
-local plugins = {
-  {
-    'lambdalisue/fern.vim',
-    lazy = false,
-    dependencies = {
+---@class FilerKeymaps
+---@field toggle string
+
+---@param keys FilerKeymaps
+return function(keys)
+  return {
+    {
+      'lambdalisue/fern.vim',
+      lazy = false,
+      dependencies = {
+        'lambdalisue/glyph-palette.vim',
+      },
+      config = function()
+        vim.g['fern#default_hidden'] = true
+        vim.keymap.set('n', keys.toggle, function()
+          local parent_dir = vim.fn.expand '%:h'
+          vim.cmd(':Fern ' .. parent_dir .. ' -drawer -toggle -width=40<CR>')
+        end)
+      end,
+    },
+
+    {
       'lambdalisue/glyph-palette.vim',
+      lazy = false,
+      config = function()
+        vim.api.nvim_create_autocmd('FileType', {
+          pattern = { 'fern' },
+          callback = function()
+            vim.fn['glyph_palette#apply']()
+          end,
+        })
+      end,
     },
-  },
 
-  { 'lambdalisue/glyph-palette.vim', lazy = false },
-
-  {
-    'yuki-yano/fern-preview.vim',
-    lazy = false,
-    dependencies = {
-      'lambdalisue/fern.vim',
+    {
+      'yuki-yano/fern-preview.vim',
+      lazy = false,
+      dependencies = {
+        'lambdalisue/fern.vim',
+      },
     },
-  },
 
-  {
-    'lambdalisue/fern-git-status.vim',
-    lazy = false,
-    dependencies = {
-      'lambdalisue/fern.vim',
+    {
+      'lambdalisue/fern-git-status.vim',
+      lazy = false,
+      dependencies = {
+        'lambdalisue/fern.vim',
+      },
     },
-  },
 
-  { 'lambdalisue/nerdfont.vim', lazy = false },
+    { 'lambdalisue/nerdfont.vim', lazy = false },
 
-  {
-    'lambdalisue/fern-renderer-nerdfont.vim',
-    lazy = false,
-    dependencies = {
-      'lambdalisue/fern.vim',
-      'lambdalisue/nerdfont.vim',
+    {
+      'lambdalisue/fern-renderer-nerdfont.vim',
+      lazy = false,
+      dependencies = {
+        'lambdalisue/fern.vim',
+        'lambdalisue/nerdfont.vim',
+      },
+      config = function()
+        vim.g['fern#renderer'] = 'nerdfont'
+      end,
     },
-  },
 
-  {
-    'lambdalisue/fern-hijack.vim',
-    lazy = false,
-    dependencies = {
-      'lambdalisue/fern.vim',
+    {
+      'lambdalisue/fern-hijack.vim',
+      lazy = false,
+      dependencies = {
+        'lambdalisue/fern.vim',
+      },
     },
-  },
-}
-
-local function setup()
-  vim.g['fern#default_hidden'] = true
-  vim.g['fern#renderer'] = 'nerdfont'
-
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'fern' },
-    callback = function()
-      vim.fn['glyph_palette#apply']()
-    end,
-  })
+  }
 end
-
----@param key string
-local function registerToggleAction(key)
-  vim.keymap.set('n', key, function()
-    local parent_dir = vim.fn.expand '%:h'
-    vim.cmd(':Fern ' .. parent_dir .. ' -drawer -toggle -width=40<CR>')
-  end)
-end
-
-return {
-  plugins = plugins,
-  setup = setup,
-  registerToggleAction = registerToggleAction,
-}

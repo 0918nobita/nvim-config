@@ -2,93 +2,55 @@ require 'my_nvim/basic'
 require 'my_nvim/init_lazy_nvim'
 
 local buffer = require 'my_nvim/buffer'
+local colorscheme = require 'my_nvim/colorscheme'
 local filer = require 'my_nvim/filer'
+local fuzzy_finder = require 'my_nvim/fuzzy_finder'
+local github_copilot = require 'my_nvim/github_copilot'
 local lsp = require 'my_nvim/lsp'
 local statusline = require 'my_nvim/statusline'
 
-vim.g.copilot_no_tab_map = true
-
 require('lazy').setup {
-  buffer.plugins,
-  filer.plugins,
-  lsp.plugins,
-  statusline.plugins,
+  buffer {
+    prev = '<C-h>',
+    next = '<C-l>',
+  },
 
-  -- カラースキーム
-  { 'cocopon/iceberg.vim', lazy = false },
+  filer {
+    toggle = '<C-k>',
+  },
 
-  -- fuzzy finder
-  {
-    'nvim-telescope/telescope.nvim',
-    lazy = false,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
+  fuzzy_finder {
+    close = '<ESC>',
+    find_files = '<C-p>',
+    live_grep = '<C-g>',
+  },
+
+  lsp {
+    action = {
+      definition = 'gd',
+      format = 'gf',
+      hover = 'K',
+      references = 'gr',
+    },
+    completion = {
+      next_item = '<Tab>',
+      prev_item = '<S-Tab>',
+      abort = '<C-e>',
+      confirm = '<CR>',
+    },
+    diagnostics = {
+      open_float = 'ge',
+      goto_next = 'g]',
+      goto_prev = 'g[',
     },
   },
+
+  statusline,
+  colorscheme,
 
   { 'f-person/git-blame.nvim', lazy = false },
 
-  { 'github/copilot.vim', lazy = false },
-}
-
-vim.cmd.colorscheme 'iceberg'
-
-buffer.setup()
-
-buffer.setKeymaps {
-  prev = '<C-h>',
-  next = '<C-l>',
-}
-
-filer.setup()
-statusline.setup()
-
-filer.registerToggleAction '<C-k>'
-
-lsp.setupServers()
-
-lsp.setupCompletion {
-  nextItem = '<Tab>',
-  prevItem = '<S-Tab>',
-  abort = '<C-e>',
-  confirm = '<CR>',
-}
-
-lsp.setKeymaps {
-  definition = 'gd',
-  format = 'gf',
-  hover = 'K',
-  references = 'gr',
-}
-
-vim.api.nvim_set_keymap(
-  'n',
-  'ge',
-  ':lua vim.diagnostic.open_float { border = \'single\' }<CR>',
-  { noremap = true, silent = true }
-)
-
-vim.api.nvim_set_keymap('n', 'g]', ':lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', 'g[', ':lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { expr = true, noremap = false, silent = true })
-
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      n = {
-        ['<ESC>'] = require('telescope.actions').close,
-      },
-      i = {
-        ['<ESC>'] = require('telescope.actions').close,
-      },
-    },
+  github_copilot {
+    accept = '<C-j>',
   },
 }
-
-local telescope_builtin = require 'telescope.builtin'
-
-vim.keymap.set('n', '<C-p>', telescope_builtin.find_files, { noremap = true, silent = true })
-
-vim.keymap.set('n', '<C-g>', telescope_builtin.live_grep, { noremap = true, silent = true })
