@@ -25,7 +25,6 @@ return function(keys)
   return {
     {
       'neovim/nvim-lspconfig',
-      lazy = false,
       dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
       config = function()
         local lsp_config = require 'lspconfig'
@@ -161,6 +160,6 @@ return function(keys)
       },
     },
 
-    { 'hrsh7th/vim-vsnip', lazy = false },
+    'hrsh7th/vim-vsnip',
   }
 end

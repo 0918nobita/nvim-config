@@ -6,7 +6,6 @@ return function(keys)
   return {
     {
       'lambdalisue/fern.vim',
-      lazy = false,
       dependencies = {
         'lambdalisue/glyph-palette.vim',
       },
@@ -21,7 +20,6 @@ return function(keys)
 
     {
       'lambdalisue/glyph-palette.vim',
-      lazy = false,
       config = function()
         vim.api.nvim_create_autocmd('FileType', {
           pattern = { 'fern' },
@@ -33,26 +31,16 @@ return function(keys)
     },
 
     {
-      'yuki-yano/fern-preview.vim',
-      lazy = false,
-      dependencies = {
-        'lambdalisue/fern.vim',
-      },
-    },
-
-    {
       'lambdalisue/fern-git-status.vim',
-      lazy = false,
       dependencies = {
         'lambdalisue/fern.vim',
       },
     },
 
-    { 'lambdalisue/nerdfont.vim', lazy = false },
+    'lambdalisue/nerdfont.vim',
 
     {
       'lambdalisue/fern-renderer-nerdfont.vim',
-      lazy = false,
       dependencies = {
         'lambdalisue/fern.vim',
         'lambdalisue/nerdfont.vim',
@@ -64,7 +52,6 @@ return function(keys)
 
     {
       'lambdalisue/fern-hijack.vim',
-      lazy = false,
       dependencies = {
         'lambdalisue/fern.vim',
       },
