@@ -7,10 +7,10 @@ local colorscheme = require 'my_nvim/colorscheme'
 local filer = require 'my_nvim/filer'
 local fuzzy_finder = require 'my_nvim/fuzzy_finder'
 local github_copilot = require 'my_nvim/github_copilot'
+local highlight = require 'my_nvim/highlight'
 local lsp = require 'my_nvim/lsp'
 local notification = require 'my_nvim/notification'
 local statusline = require 'my_nvim/statusline'
-local highlight = require 'my_nvim/highlight'
 
 require('lazy').setup {
   buffer {
