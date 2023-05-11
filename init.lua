@@ -3,6 +3,7 @@ require 'my_nvim/init_lazy_nvim'
 
 local buffer = require 'my_nvim/buffer'
 local cmdline = require 'my_nvim/cmdline'
+local codeium = require 'my_nvim/codeium'
 local colorscheme = require 'my_nvim/colorscheme'
 local filer = require 'my_nvim/filer'
 local fuzzy_finder = require 'my_nvim/fuzzy_finder'
@@ -55,15 +56,10 @@ require('lazy').setup {
 
   'f-person/git-blame.nvim',
 
-  {
-    'Exafunction/codeium.vim',
-    init = function()
-      vim.g.codeium_no_map_tab = 1
-    end,
-    config = function()
-      vim.keymap.set('i', '<C-j>', function()
-        return vim.fn['codeium#Accept']()
-      end, { expr = true })
-    end,
+  codeium {
+    clearCurrentSuggestion = '<C-]>',
+    insertSuggestion = '<C-j>',
+    nextSuggestion = '<M-]>',
+    previousSuggestion = '<M-[>',
   },
 }
