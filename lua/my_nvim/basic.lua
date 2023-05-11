@@ -1,4 +1,4 @@
-vim.opt.title = true
+vim.opt.title = false
 
 vim.opt.termguicolors = true
 
