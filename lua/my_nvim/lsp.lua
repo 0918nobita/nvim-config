@@ -48,6 +48,7 @@ return function(keys)
           },
         }
 
+        lsp_config.rust_analyzer.setup {}
         lsp_config.tsserver.setup {}
         lsp_config.clangd.setup {}
         lsp_config.bashls.setup {}
