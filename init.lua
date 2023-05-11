@@ -6,7 +6,6 @@ local cmdline = require 'my_nvim/cmdline'
 local colorscheme = require 'my_nvim/colorscheme'
 local filer = require 'my_nvim/filer'
 local fuzzy_finder = require 'my_nvim/fuzzy_finder'
-local github_copilot = require 'my_nvim/github_copilot'
 local highlight = require 'my_nvim/highlight'
 local lsp = require 'my_nvim/lsp'
 local notification = require 'my_nvim/notification'
@@ -56,7 +55,15 @@ require('lazy').setup {
 
   'f-person/git-blame.nvim',
 
-  github_copilot {
-    accept = '<C-j>',
+  {
+    'Exafunction/codeium.vim',
+    init = function()
+      vim.g.codeium_no_map_tab = 1
+    end,
+    config = function()
+      vim.keymap.set('i', '<C-j>', function()
+        return vim.fn['codeium#Accept']()
+      end, { expr = true })
+    end,
   },
 }
