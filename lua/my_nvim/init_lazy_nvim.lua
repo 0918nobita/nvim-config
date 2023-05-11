@@ -1,6 +1,6 @@
-local lazyPath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazy_path = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
-if not vim.loop.fs_stat(lazyPath) then
+if not vim.loop.fs_stat(lazy_path) then
   print 'Installing lazy.nvim'
 
   vim.fn.system {
@@ -9,10 +9,10 @@ if not vim.loop.fs_stat(lazyPath) then
     '--filter=blob:none',
     'git@github.com:folke/lazy.nvim.git',
     '--branch=stable',
-    lazyPath,
+    lazy_path,
   }
 
   print 'Successfully installed lazy.nvim'
 end
 
-vim.opt.rtp:prepend(lazyPath)
+vim.opt.rtp:prepend(lazy_path)
