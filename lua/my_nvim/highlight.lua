@@ -26,12 +26,14 @@ return {
       vim.api.nvim_set_hl(0, 'IndentBlanklineIndent3', { fg = '#33193d' })
       vim.api.nvim_set_hl(0, 'IndentBlanklineIndent4', { fg = '#102f39' })
 
-      require('indent_blankline').setup {
-        char_highlight_list = {
-          'IndentBlanklineIndent1',
-          'IndentBlanklineIndent2',
-          'IndentBlanklineIndent3',
-          'IndentBlanklineIndent4',
+      require('ibl').setup {
+        indent = {
+          highlight = {
+            'IndentBlanklineIndent1',
+            'IndentBlanklineIndent2',
+            'IndentBlanklineIndent3',
+            'IndentBlanklineIndent4',
+          },
         },
       }
     end,
